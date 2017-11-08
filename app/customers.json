@@ -1,0 +1,31 @@
+{
+"personnes":
+[
+		{
+			"nom": "Traus",
+			"prenom": "Eddy",
+			"email": "eddy.traus@email.com",
+			"telephone":"065456789",
+			"montantcredit": 1000
+		},
+		{
+			"nom": "Brus",
+			"prenom": "Mike",
+			"email": "mike.brus@email.com",
+			"montantcredit": 1250
+		},
+		{
+			"nom": "Kilpi",
+			"prenom": "Julian",
+			"email": "julian.kilpi@email.com",
+			"montantcredit": 7000
+		},
+		{
+			"nom": "Just",
+			"prenom": "Killian",
+			"email": "killian.just@email.com",
+			"montantcredit": 3000
+		}
+
+]
+}

@@ -16,10 +16,14 @@ angular.module('angular15ComponentsAppApp')
       return personne;
     }
   })
-  .controller('MainCtrl', ['$scope', function ($scope) {
+  .controller('MainCtrl', ['$scope', '$http', '$uibModal', function ($scope, $http, $uibModal) {
 
     $scope.limit = 4;
+    $scope.personnes = [];
+    $scope.montants = [1000,2000,3000];
 
+    /**
+     * Loaded from getCustomers (json)
     $scope.personne = {
       nom: "",
       prenom: "",
@@ -52,6 +56,7 @@ angular.module('angular15ComponentsAppApp')
         email: "killian.just@email.com",
         montantcredit: 3000
       }];
+     */
 
     $scope.addCustomer = function(){
       var copyPersonne={
@@ -73,6 +78,40 @@ angular.module('angular15ComponentsAppApp')
       $scope.personne.email = "";
       $scope.personne.montantcredit = 0;
     };
+
+    $scope.postCustomers = function(){
+      $http({
+        method: "POST",
+        url:"",
+        data:""
+      }).then(function successCallback(response){
+      },function errorCallback(error){
+        if(error.status == 404){
+          $scope.openModal();
+        }
+      });
+    };
+
+    $scope.openModal = function(){
+      $uibModal.open({
+        templateUrl: '../../404.html'
+      });
+    };
+
+    $scope.getCustomers = function(){
+      $http({
+        method: "GET",
+        url: "../../customers.json"
+      }).then(function successCallback(response){
+        $scope.personnes = $scope.personnes.concat(response.data.personnes);
+        alert("Clients ajoutés à la liste !");
+      },function errorCallback(error){
+        if(error.status == 404){
+          $scope.openModal();
+        }
+      });
+    };
+
 
 
     this.awesomeThings = [

@@ -1,6 +1,6 @@
 <h2 class="mt-2">Formulaire d'ajout de clients</h2>
 
-<form novalidate class="simple-form" name="formulaire">
+<form novalidate class="simple-form" name="formulaire" ng-submit="addCustomer()">
 
   <div class="row form-group" ng-class="{'has-error':!formulaire.nom.$valid}">
     <label class="col-sm-4" for="nom">Nom : </label>
@@ -40,17 +40,26 @@
 
   <div class="row form-group" ng-class="{'has-error':!formulaire.montantcredit.$valid}">
     <label class="col-sm-4" for="montantcredit">Montant du crédit : </label>
+    <select ng-options="montant for montant in montants" ng-model="personne.montantcredit" id="montantcredit" name="montantcredit" class="form-control" required>
+    </select>
+
+    <!--
     <input id="montantcredit" name="montantcredit" class="form-control" type="number"
            placeholder="Entrer votre montant pour le crédit" required limit-montant ng-model="personne.montantcredit"/>
+    -->
+
   </div>
   <div ng-show="!formulaire.montantcredit.$valid" class="alert alert-info">
     Le montant du crédit est requis, doit être de type numérique et limité à {{limit}} caractères.
   </div>
 
   <div class="row form-check">
-    <input ng-disabled="!formulaire.$valid" type="submit" ng-click="addCustomer()" class="btn btn-success"
-           value="Envoyer"/>
-    <input type="submit" class="btn btn-danger" ng-click="viderChamp()" value="Annuler"/>
+      <input ng-disabled="!formulaire.$valid" type="submit" class="btn btn-success" value="Envoyer"/>
+      <a class="btn btn-danger" ng-click="viderChamp()">Annuler</a>
+    <div class="pull-right">
+      <a class="btn btn-info align-self-end" ng-click="postCustomers()">Load customers (POST)</a>
+      <a class="btn btn-info" ng-click="getCustomers()">Load customers (GET)</a>
+    </div>
   </div>
 
 </form>
