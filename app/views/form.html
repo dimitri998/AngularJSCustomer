@@ -1,37 +1,56 @@
 <h2 class="mt-2">Formulaire d'ajout de clients</h2>
 
-<form class="simple-form" name="formulaire">
+<form novalidate class="simple-form" name="formulaire">
 
-  <div class="row form-group">
+  <div class="row form-group" ng-class="{'has-error':!formulaire.nom.$valid}">
     <label class="col-sm-4" for="nom">Nom : </label>
-    <input id="nom" name="nom" class="form-control" type="text" placeholder="Entrer votre nom" required ng-model="personne.nom"/>
+    <input id="nom" name="nom" class="form-control" type="text" placeholder="Entrer votre nom" required
+           ng-model="personne.nom"/>
+  </div>
+  <div ng-show="!formulaire.nom.$valid" class="alert alert-info">
+    Le nom est requis.
   </div>
 
-  <div class="row form-group">
+  <div class="row form-group" ng-class="{'has-error':!formulaire.prenom.$valid}">
     <label class="col-sm-4" for="prenom">Prénom : </label>
-    <input id="prenom" name="prenom" class="form-control" type="text" placeholder="Entrer votre prénom" required ng-model="personne.prenom"/>
+    <input id="prenom" name="prenom" class="form-control" type="text" placeholder="Entrer votre prénom" required
+           ng-model="personne.prenom"/>
+  </div>
+  <div ng-show="!formulaire.prenom.$valid" class="alert alert-info">
+    Le prenom est requis.
   </div>
 
-  <div class="row form-group">
+  <div class="row form-group" ng-class="{'has-error':!formulaire.telephone.$valid}">
     <label class="col-sm-4" for="telephone">Téléphone : </label>
     <input id="telephone" name="telephone" verify-number placeholder="Numéro de téléphone (Facultatif)"
-           class="form-control" type="text" ng-model="personne.telephone" />
+           class="form-control" type="text" ng-model="personne.telephone"/>
+  </div>
+  <div ng-show="!formulaire.telephone.$valid" class="alert alert-info">
+    Le telephone doit être composé de 10 chiffres.
   </div>
 
-  <div class="row form-group">
+  <div class="row form-group" ng-class="{'has-error':!formulaire.email.$valid}">
     <label class="col-sm-4" for="email">Email : </label>
-    <input id="email" name="email" class="form-control" type="email" placeholder="Entrer votre email" required ng-model="personne.email"/>
+    <input id="email" name="email" class="form-control" type="email" placeholder="Entrer votre email" required
+           ng-model="personne.email"/>
+  </div>
+  <div ng-show="!formulaire.email.$valid" class="alert alert-info">
+    L'email est requis au format correct.
   </div>
 
-  <div class="row form-group">
+  <div class="row form-group" ng-class="{'has-error':!formulaire.montantcredit.$valid}">
     <label class="col-sm-4" for="montantcredit">Montant du crédit : </label>
     <input id="montantcredit" name="montantcredit" class="form-control" type="number"
            placeholder="Entrer votre montant pour le crédit" required limit-montant ng-model="personne.montantcredit"/>
   </div>
+  <div ng-show="!formulaire.montantcredit.$valid" class="alert alert-info">
+    Le montant du crédit est requis, doit être de type numérique et limité à {{limit}} caractères.
+  </div>
 
   <div class="row form-check">
-    <input ng-disabled="!formulaire.$valid" type="submit" ng-click="addCustomer()" class="btn btn-success" value="Envoyer"/>
-    <input type="submit" class="btn btn-danger" value="Annuler"/>
+    <input ng-disabled="!formulaire.$valid" type="submit" ng-click="addCustomer()" class="btn btn-success"
+           value="Envoyer"/>
+    <input type="submit" class="btn btn-danger" ng-click="viderChamp()" value="Annuler"/>
   </div>
 
 </form>

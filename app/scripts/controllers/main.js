@@ -18,6 +18,8 @@ angular.module('angular15ComponentsAppApp')
   })
   .controller('MainCtrl', ['$scope', function ($scope) {
 
+    $scope.limit = 4;
+
     $scope.personne = {
       nom: "",
       prenom: "",
@@ -53,14 +55,18 @@ angular.module('angular15ComponentsAppApp')
 
     $scope.addCustomer = function(){
       var copyPersonne={
-        nom: "",
-        prenom: "",
-        telephone: "",
-        email: "",
-        montantcredit: 0
+        nom: $scope.personne.nom,
+        prenom: $scope.personne.prenom,
+        telephone: $scope.personne.telephone,
+        email: $scope.personne.email,
+        montantcredit: $scope.personne.montantcredit
       };
-      angular.copy($scope.personne, copyPersonne);
+
       $scope.personnes.push(copyPersonne);
+      $scope.viderChamp();
+    };
+
+    $scope.viderChamp = function () {
       $scope.personne.nom = "";
       $scope.personne.prenom = "";
       $scope.personne.telephone = "";
@@ -112,7 +118,7 @@ angular.module('angular15ComponentsAppApp')
         } else {
           mCtrl.$setValidity('montantcredit', false);
         }
-        return $filter('limitTo')(value,4);
+        return $filter('limitTo')(value, scope.limit);
       }
       mCtrl.$parsers.push(limitValidation);
     }
