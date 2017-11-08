@@ -1,0 +1,21 @@
+<h2 class="mt-2">Clients enregistrés</h2>
+<table class="table table-stripped mb-2">
+  <thead>
+  <tr>
+    <th>Nom</th>
+    <th>Prénom</th>
+    <th>Email</th>
+    <th>Téléphone</th>
+    <th>Montant du crédit</th>
+  </tr>
+  </thead>
+  <tbody ng-repeat="personne in personnes | orderBy:'nom'">
+  <tr>
+    <td>{{personne.nom | uppercase}}</td>
+    <td>{{personne.prenom | uppercase}}</td>
+    <td>{{personne.email}}</td>
+    <td>{{(personne | fillNumber).telephone}}</td>
+    <td>{{personne.montantcredit | currency:'€'}}</td>
+  </tr>
+  </tbody>
+</table>
